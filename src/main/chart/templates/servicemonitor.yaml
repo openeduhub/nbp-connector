@@ -1,0 +1,22 @@
+{{- if and .Values.global.metrics.servicemonitor.enabled .Values.config.metrics }}
+{{- if .Capabilities.APIVersions.Has "monitoring.coreos.com/v1" }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "edu_sharing_projects_wlo_nbp_connector.name" . }}
+  labels: {{ include "edu_sharing_projects_wlo_nbp_connector.labels.app" . | nindent 4 }}
+    app.kubernetes.io/component: "metrics"
+spec:
+  endpoints:
+  - path: "/actuator/prometheus"
+    port: http-management
+    interval: {{ .Values.global.metrics.scrape.interval }}
+    scrapeTimeout: {{ .Values.global.metrics.scrape.timeout }}
+  selector:
+    matchLabels: {{ include "edu_sharing_projects_wlo_nbp_connector.labels.app" . | nindent 6 }}
+      app.kubernetes.io/component: "metrics"
+  namespaceSelector:
+    matchNames:
+    - {{ .Release.Namespace }}
+{{- end }}
+{{- end }}

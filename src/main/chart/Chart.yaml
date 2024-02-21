@@ -1,0 +1,9 @@
+apiVersion: v2
+
+name: nbp-connector
+description: nbp-connector
+
+icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Edu-sharing_Logo.svg/200px-Edu-sharing_Logo.svg.png
+
+version: 0.0.0
+appVersion: git

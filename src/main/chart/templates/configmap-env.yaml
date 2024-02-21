@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "edu_sharing_projects_wlo_nbp_connector.name" . }}-env
+  labels: {{ include "edu_sharing_projects_wlo_nbp_connector.labels.app" . | nindent 4 }}
+data:
+  APPLICATION_CACHE_TTL: "{{ .Values.service.cache.ttl }}"
+  EDU_SHARING_BASEPATH: "{{ .Values.config.repository.basepath }}"
+  EDU_SHARING_COURSE_ID: "{{ .Values.config.repository.collection }}"
+  EDU_SHARING_READTIMEOUT: "{{ .Values.config.repository.timeout }}"
+  SPRING_MVC_ASYNC_REQUEST-TIMEOUT: "{{ .Values.service.timeout }}"
+  JAVA_OPTS: >-
+    {{- with .Values.config.jvm.ram.minPercentage }}
+    -XX:InitialRAMPercentage={{ . }}
+    {{- end }}
+    {{- with .Values.config.jvm.ram.maxPercentage }}
+    -XX:MaxRAMPercentage={{ . }}
+    {{- end }}
+    -Dcom.sun.management.jmxremote
+    -Dcom.sun.management.jmxremote.authenticate=false
+    -Dcom.sun.management.jmxremote.port=7199
+    -Dcom.sun.management.jmxremote.ssl=false
+    {{- if default .Values.global.debug .Values.debug }}
+    -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+    {{- end }}
+  SPRING_APPLICATION_JSON: {{ .Values.config.override | quote }}

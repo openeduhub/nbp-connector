@@ -1,0 +1,43 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "edu_sharing_projects_wlo_nbp_connector.name" . }}
+  labels: {{ include "edu_sharing_projects_wlo_nbp_connector.labels.app" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector: {{ include "edu_sharing_projects_wlo_nbp_connector.labels.app" . | nindent 4 }}
+  ports:
+    - name: http-api
+      port: {{ .Values.service.port.api }}
+      targetPort: api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "edu_sharing_projects_wlo_nbp_connector.name" . }}-headless
+  labels: {{ include "edu_sharing_projects_wlo_nbp_connector.labels.app" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  clusterIP: None
+  publishNotReadyAddresses: true
+  selector: {{ include "edu_sharing_projects_wlo_nbp_connector.labels.app" . | nindent 4 }}
+  ports:
+    - name: http-api
+      port: {{ .Values.service.port.api }}
+{{- if and .Values.global.metrics.servicemonitor.enabled .Values.config.metrics }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "edu_sharing_projects_wlo_nbp_connector.name" . }}-metrics
+  labels: {{ include "edu_sharing_projects_wlo_nbp_connector.labels.app" . | nindent 4 }}
+    app.kubernetes.io/component: "metrics"
+spec:
+  type: ClusterIP
+  selector: {{ include "edu_sharing_projects_wlo_nbp_connector.labels.app" . | nindent 4 }}
+  ports:
+    - name: http-management
+      port: {{ .Values.service.port.management }}
+      targetPort: management
+{{- end }}
