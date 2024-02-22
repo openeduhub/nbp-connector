@@ -26,4 +26,4 @@ deploy:
   variables:
     ENABLE_DOCKER_DAEMON_BUILD: "false"
   script:
-    - mvn $MAVEN_CLI -s .mvn/settings.xml deploy -P docker.deploy,helm
+    - mvn $MAVEN_CLI -s .mvn/settings.xml deploy -P docker.deploy,helm -Dmaven.test.skip=true
