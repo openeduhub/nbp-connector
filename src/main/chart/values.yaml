@@ -93,9 +93,14 @@ ingress:
 config:
 
   auth:
+    apiToken: ""
 
-    username: ""
-    password: ""
+  nbp:
+    sourceId: ""
+    oAuth2:
+      issuerUrl: https://aai.demo.meinbildungsraum.de/realms/nbp-aai
+      clientId: ""
+      clientSecret: ""
 
   jvm:
     ram:
