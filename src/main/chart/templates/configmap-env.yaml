@@ -4,10 +4,8 @@ metadata:
   name: {{ include "edu_sharing_projects_wlo_nbp_connector.name" . }}-env
   labels: {{ include "edu_sharing_projects_wlo_nbp_connector.labels.app" . | nindent 4 }}
 data:
-  APPLICATION_CACHE_TTL: "{{ .Values.service.cache.ttl }}"
-  EDU_SHARING_BASEPATH: "{{ .Values.config.repository.basepath }}"
+  edu.sharing.baseUrl: "{{ .Values.config.repository.baseUri }}"
   spring.security.oauth2.client.provider.nbp.issuer-uri: "{{ .Values.config.nbp.oAuth2.issuerUrl }}"
-  SPRING_MVC_ASYNC_REQUEST-TIMEOUT: "{{ .Values.service.timeout }}"
   JAVA_OPTS: >-
     {{- with .Values.config.jvm.ram.minPercentage }}
     -XX:InitialRAMPercentage={{ . }}

@@ -20,15 +20,22 @@ import java.time.format.DateTimeFormatter;
 @Service
 @RequiredArgsConstructor
 public class NBPLomPushService {
-    private final WebClient webClient;
 
-    @Value("${}")
+
+    private final WebClient edusharingOAIWebClient;
+    private final WebClient nbpWebClient;
+
+//    @Value("${}")
 
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
-    @PostConstruct
+
+
+
+
+
     public void Test() {
-        WebClient.ResponseSpec nbp = webClient.put()
+        WebClient.ResponseSpec nbp = nbpWebClient.put()
                 .uri(uriBuilder -> uriBuilder.pathSegment("push-connector", "api", "course", "{source}", "{id}").build("edu-sharing-editorial-network", "1"))
                 .accept(MediaType.APPLICATION_JSON)
 //                .attributes(ServerOAuth2AuthorizedClientExchangeFilterFunction.clientRegistrationId("nbp"))

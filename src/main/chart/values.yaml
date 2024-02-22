@@ -61,10 +61,6 @@ service:
     api: 8080
     management: 8081
 
-  timeout: 600000
-  cache:
-    ttl: 86400 #in seconds => 1 Day
-
 ########################################################################################################################
 
 ingress:
@@ -113,8 +109,7 @@ config:
 
   repository:
 
-    basepath: http://edusharing-repository-service:8080/edu-sharing/rest
-    collection: ""
+    baseUri: http://edusharing-repository-service:8080/edu-sharing
     username: ""
     password: ""
     timeout: 120000

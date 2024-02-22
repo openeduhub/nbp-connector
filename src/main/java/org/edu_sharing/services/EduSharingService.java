@@ -45,7 +45,7 @@ public class EduSharingService {
     private static final String HTML_PATTERN = "<(\"[^\"]*\"|'[^']*'|[^'\">])*>";
     private static final Pattern htmlPattern = Pattern.compile(HTML_PATTERN);
 
-    public List<NBPCourseDTO> getCourses() throws ApiException {
+    public List<NBPCourseDTO> getCourse(String nodeId) throws ApiException {
         List<NBPCourseDTO> data = new ArrayList<>();
         Pagination pagination;
         int count = 0;
