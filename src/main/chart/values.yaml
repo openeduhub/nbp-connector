@@ -93,7 +93,7 @@ config:
 
   nbp:
     source:
-      slug: ""
+      slug: "edu-sharing-editorial-network"
     oAuth2:
       issuerUrl: https://aai.demo.meinbildungsraum.de/realms/nbp-aai
       clientId: ""
