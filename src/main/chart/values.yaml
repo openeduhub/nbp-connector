@@ -92,7 +92,8 @@ config:
     apiToken: ""
 
   nbp:
-    sourceId: ""
+    source:
+      slug: ""
     oAuth2:
       issuerUrl: https://aai.demo.meinbildungsraum.de/realms/nbp-aai
       clientId: ""

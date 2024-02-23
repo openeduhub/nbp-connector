@@ -6,6 +6,7 @@ metadata:
 data:
   edu.sharing.baseUrl: "{{ .Values.config.repository.baseUri }}"
   spring.security.oauth2.client.provider.nbp.issuer-uri: "{{ .Values.config.nbp.oAuth2.issuerUrl }}"
+  nbp.source.slug: "{{ .Values.config.nbp.source.slug }}"
   JAVA_OPTS: >-
     {{- with .Values.config.jvm.ram.minPercentage }}
     -XX:InitialRAMPercentage={{ . }}
