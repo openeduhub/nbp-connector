@@ -184,7 +184,7 @@ public class NBPLomPushService {
 
     private Mono<Void> deleteById(String id) {
         return nbpWebClient.delete()
-                .uri("/datenraum/api/cpre/nodes/{id}", id)
+                .uri("/datenraum/api/core/nodes/{id}", id)
                 .retrieve()
                 .bodyToMono(Void.class);
     }
