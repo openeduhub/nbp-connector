@@ -44,7 +44,7 @@ public class NBPLomPushService {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'");
 
 
-    public Mono<Void> addOrUpdateCourse(String nodeId) {
+    public Mono<Void> addOrUpdateNode(String nodeId) {
 //        String uuid = "11";
         //language=xml
 //        String testLom = String.format("""
@@ -176,7 +176,7 @@ public class NBPLomPushService {
                 });
     }
 
-    public Mono<Void> deleteCourse(String nodeId){
+    public Mono<Void> deleteNode(String nodeId){
         return retrieveSourceId()
                 .flatMap(x->retrieveIdFor(nodeId))
                 .flatMap(this::deleteById);
